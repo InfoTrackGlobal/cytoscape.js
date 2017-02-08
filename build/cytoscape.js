@@ -2,7 +2,7 @@
 
 /*!
 
-Cytoscape.js snapshot-a7f0179159-1486422076507 (MIT licensed)
+Cytoscape.js snapshot-87d519e90a-1486531809328 (MIT licensed)
 
 Copyright (c) The Cytoscape Consortium
 
@@ -6898,6 +6898,13 @@ var corefn = ({
     options.bg = options.bg || '#fff';
 
     return renderer.jpg( options );
+  },
+
+  getExportSize: function( options ) {
+    var renderer = this._private.renderer;
+    options = options || {};
+
+    return renderer.getExportSize( options );
   }
 
 });
@@ -19697,6 +19704,23 @@ CRp.jpg = function( options ){
   return output( options, this.bufferCanvasImage( options ), 'image/jpeg' );
 };
 
+CRp.getExportSize = function( options ) {
+    var data = this.data;
+    var cy = this.cy;
+    var bb = cy.elements().boundingBox();
+    var width = options.full ? Math.ceil(bb.w) : this.data.topCanvas.clientWidth;
+    var height = options.full ? Math.ceil(bb.h) : this.data.topCanvas.clientHeight;
+    var scale = 1;
+
+    if( options.scale !== undefined ){
+      width *= options.scale;
+      height *= options.scale;
+
+      scale = options.scale;
+    }
+    return { w: width, h: height };
+};
+
 module.exports = CRp;
 
 },{"../../../is":83}],74:[function(_dereq_,module,exports){
@@ -27607,7 +27631,7 @@ util.debounce = function( func, wait, options ){ // ported lodash debounce funct
 module.exports = util;
 
 },{"../is":83,"../window":107}],106:[function(_dereq_,module,exports){
-module.exports = "snapshot-a7f0179159-1486422076507";
+module.exports = "snapshot-87d519e90a-1486531809328";
 
 },{}],107:[function(_dereq_,module,exports){
 module.exports = ( typeof window === 'undefined' ? null : window ); // eslint-disable-line no-undef

@@ -144,4 +144,21 @@ CRp.jpg = function( options ){
   return output( options, this.bufferCanvasImage( options ), 'image/jpeg' );
 };
 
+CRp.getExportSize = function( options ) {
+    var data = this.data;
+    var cy = this.cy;
+    var bb = cy.elements().boundingBox();
+    var width = options.full ? Math.ceil(bb.w) : this.data.topCanvas.clientWidth;
+    var height = options.full ? Math.ceil(bb.h) : this.data.topCanvas.clientHeight;
+    var scale = 1;
+
+    if( options.scale !== undefined ){
+      width *= options.scale;
+      height *= options.scale;
+
+      scale = options.scale;
+    }
+    return { w: width, h: height };
+};
+
 module.exports = CRp;
