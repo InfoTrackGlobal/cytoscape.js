@@ -2,7 +2,7 @@
 
 /*!
 
-Cytoscape.js snapshot-bc12c95b2f-1487816594140 (MIT licensed)
+Cytoscape.js snapshot-804f1d45c3-1487822206257 (MIT licensed)
 
 Copyright (c) The Cytoscape Consortium
 
@@ -7923,8 +7923,8 @@ var corefn = ({
     return this; // chaining
   },
 
-  getFitViewport: function( elements, padding ){
-    if( is.number( elements ) && padding === undefined ){ // elements is optional
+  getFitViewport: function( elements, padding, shift ){
+    if( is.number(elements) && padding === undefined ){ // elements is optional
       padding = elements;
       elements = undefined;
     }
@@ -7935,11 +7935,11 @@ var corefn = ({
 
     var bb;
 
-    if( is.string( elements ) ){
+    if( is.string(elements) ){
       var sel = elements;
       elements = this.$( sel );
 
-    } else if( is.boundingBox( elements ) ){ // assume bb
+    } else if( is.boundingBox(elements) ){ // assume bb
       var bbe = elements;
       bb = {
         x1: bbe.x1,
@@ -7951,8 +7951,8 @@ var corefn = ({
       bb.w = bb.x2 - bb.x1;
       bb.h = bb.y2 - bb.y1;
 
-    } else if( !is.elementOrCollection( elements ) ){
-      elements = this.mutableElements();
+    } else if( !is.elementOrCollection(elements) ){
+      elements = this.elements();
     }
 
     bb = bb || elements.boundingBox();
@@ -7960,18 +7960,23 @@ var corefn = ({
     var w = this.width();
     var h = this.height();
     var zoom;
-    padding = is.number( padding ) ? padding : 0;
+    padding = is.number(padding) ? padding : 0;
 
-    if( !isNaN( w ) && !isNaN( h ) && w > 0 && h > 0 && !isNaN( bb.w ) && !isNaN( bb.h ) &&  bb.w > 0 && bb.h > 0 ){
-      zoom = Math.min( (w - 2 * padding) / bb.w, (h - 2 * padding) / bb.h );
+    if( !isNaN(w) && !isNaN(h) && w > 0 && h > 0 && !isNaN(bb.w) && !isNaN(bb.h) &&  bb.w > 0 && bb.h > 0 ){
+      if (shift) {
+        zoom = Math.min( (w - shift.w - 2*padding)/bb.w, (h - shift.h - 2*padding)/bb.h );
+      } else {
+        zoom = Math.min( (w - 2*padding)/bb.w, (h - 2*padding)/bb.h );
+      }
+
 
       // crop zoom
       zoom = zoom > this._private.maxZoom ? this._private.maxZoom : zoom;
       zoom = zoom < this._private.minZoom ? this._private.minZoom : zoom;
 
       var pan = { // now pan to middle
-        x: (w - zoom * ( bb.x1 + bb.x2 )) / 2,
-        y: (h - zoom * ( bb.y1 + bb.y2 )) / 2
+        x: (w - zoom*( bb.x1 + bb.x2 ))/2,
+        y: (h - zoom*( bb.y1 + bb.y2 ))/2
       };
 
       return {
@@ -27633,7 +27638,7 @@ util.debounce = function( func, wait, options ){ // ported lodash debounce funct
 module.exports = util;
 
 },{"../is":83,"../window":107}],106:[function(_dereq_,module,exports){
-module.exports = "snapshot-bc12c95b2f-1487816594140";
+module.exports = "snapshot-804f1d45c3-1487822206257";
 
 },{}],107:[function(_dereq_,module,exports){
 module.exports = ( typeof window === 'undefined' ? null : window ); // eslint-disable-line no-undef
