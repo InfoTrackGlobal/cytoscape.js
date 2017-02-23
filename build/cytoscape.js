@@ -2,7 +2,7 @@
 
 /*!
 
-Cytoscape.js snapshot-87d519e90a-1486531809328 (MIT licensed)
+Cytoscape.js snapshot-bc12c95b2f-1487816594140 (MIT licensed)
 
 Copyright (c) The Cytoscape Consortium
 
@@ -16582,8 +16582,10 @@ BRp.load = function(){
         return p.event.pointerId === e.pointerId;
       } )[0];
 
-      p.event = e;
-      p.touch = makeTouch( e );
+      if (p) {
+        p.event = e;
+        p.touch = makeTouch( e );
+      }
     };
 
     var addTouchesToEvent = function( e ){
@@ -27631,7 +27633,7 @@ util.debounce = function( func, wait, options ){ // ported lodash debounce funct
 module.exports = util;
 
 },{"../is":83,"../window":107}],106:[function(_dereq_,module,exports){
-module.exports = "snapshot-87d519e90a-1486531809328";
+module.exports = "snapshot-bc12c95b2f-1487816594140";
 
 },{}],107:[function(_dereq_,module,exports){
 module.exports = ( typeof window === 'undefined' ? null : window ); // eslint-disable-line no-undef

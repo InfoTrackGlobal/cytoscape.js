@@ -1957,8 +1957,10 @@ BRp.load = function(){
         return p.event.pointerId === e.pointerId;
       } )[0];
 
-      p.event = e;
-      p.touch = makeTouch( e );
+      if (p) {
+        p.event = e;
+        p.touch = makeTouch( e );
+      }
     };
 
     var addTouchesToEvent = function( e ){
